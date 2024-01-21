@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Add Task</h2>
+<form mat-dialog-content [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+<mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" cdkFocusInitial [(ngModel)]="data.task.title" />
+    <mat-error *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+        Title is required.
+    </mat-error>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" [(ngModel)]="data.task.description"></textarea>
+    <mat-error *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched">
+        Description is required.
+    </mat-error>
+</mat-form-field>
+
+<div mat-dialog-actions>
+    <button mat-button [disabled]="!taskForm.valid" [mat-dialog-close]="{ task: data.task }">OK</button>
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+</div>
+
+</form>
